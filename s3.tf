@@ -1,6 +1,6 @@
 # creating s3 bucket
 resource "aws_s3_bucket" "lab1_bucket" {
-  bucket        = "lab1-76453746"
+  bucket        = "lab1.${local.domain}"
   force_destroy = true
 }
 # enable versioning
@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "s3_policy" {
   statement {
     actions   = ["s3:*"]
     effect    = "Allow"
-    resources = ["arn:aws:s3:::lab1-76453746/*"]
+    resources = ["arn:aws:s3:::${aws_s3_bucket.lab1_bucket.bucket}/*"]
     principals {
       type        = "*"
       identifiers = ["*"]
